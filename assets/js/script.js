@@ -1,17 +1,11 @@
-// Assignment code here
-
-
-
-
-
 function main() {
 
   // Get references to the #generate element
   var generateBtn = document.querySelector("#generate");
   // Add event listener to generate button
+  //document.querySelector("#password") = "Hello World";
   generateBtn.addEventListener("hover", writePassword());
-  // let passwordFinal = generatePassword([20,true,true,true,true]);
-  // console.log("Final Password: ", passwordFinal);
+
 }
 
 function writePassword() {
