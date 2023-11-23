@@ -1,18 +1,39 @@
 // Assignment Code
 function getUserPreferences() {
-  let preferencesArray = [20, false, true, true, true];
-  // TODO: Make PreferencesArray from user Input
+  // Function gets the length of a password, and what characters they want in it
+  let preferencesArray = [];
+  validLength = false;
+  validCharSet = false;
+
+  // Checks if input is a number and is between 8 and 128
+  while(!validLength) {
   
-  // preferencesArray[0] = window.prompt("How many characters long do you want your password?");
-  // preferencesArray[1] = window.confirm("Do you want special characters?");
-  // preferencesArray[2] = window.confirm("Do you want numbers?");
-  // preferencesArray[3] = window.confirm("Do you want lower-case letters?");
-  // preferencesArray[4] = window.confirm("Do you want upper-case letters?");
-  // Special Cases: 
-  /*
-  password length: 8-128
-  at least one type of character type is true
-  */
+    preferencesArray[0] = window.prompt("How many characters long do you want your password? (8-128)");
+    if (isNaN(preferencesArray[0])) {
+      window.alert("Invalid Input: Please enter an integer between 8 and 128");
+      continue;
+    }
+    preferencesArray[0] = Math.floor(Number(preferencesArray[0]));
+    if (preferencesArray[0] >= 8 && preferencesArray[0] <= 128) {
+      validLength = true;
+    }
+    else {
+      window.alert("Invalid Length: Please try again");
+    }
+  }
+  // Checks if selection choice has at least one type of characters
+  while(!validCharSet) {
+    preferencesArray[1] = window.confirm("Do you want special characters?");
+    preferencesArray[2] = window.confirm("Do you want numbers?");
+    preferencesArray[3] = window.confirm("Do you want lower-case letters?");
+    preferencesArray[4] = window.confirm("Do you want upper-case letters?");
+    if(preferencesArray[1] || preferencesArray[2] || preferencesArray[3] || preferencesArray[4]) {
+      validCharSet = true;
+    }
+    else {
+      window.alert("Invalid Input: Please allow at least one type of character");
+    }
+  }
   return preferencesArray;
 }
 function shuffleArray(arr) {
@@ -86,7 +107,8 @@ var generateBtn = document.querySelector("#generate");
 
 // Write password to the #password input
 function writePassword() {
-  var password = generatePassword();
+  var userPreferences = getUserPreferences();
+  var password = generatePassword(userPreferences);
   var passwordText = document.querySelector("#password");
 
   passwordText.value = password;

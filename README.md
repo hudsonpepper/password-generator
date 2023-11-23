@@ -18,7 +18,7 @@ The site can be accessed here:
 <!-- ![Screenshot of Deployed Site](./assets/images/Screenshot_Password.png "Screenshot") -->
 ## Credits
 
-The underlying HTML and CSS code is copied from the repository https://github.com/coding-boot-camp/friendly-parakeet, though nearly all of the JavaScript is original work. 
+This code is an adaptation of the code from https://github.com/coding-boot-camp/friendly-parakeet, though the password generation and user input sections of code are original work.
 
 ## License
 
