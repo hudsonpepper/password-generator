@@ -1,152 +1,103 @@
 // Assignment code here
 
-/* Game Plan:
-X 1. Make Random Character Generator, log to console
-X 2. Make Boolean List of Possibilities
-  3. Make Random String Generator of set length.
-X 4. Incorporate Options into String Generator
-  5. Begin linking Possibilities from 2. to User Prompts
-  6. Print Result to HTML instead of Console
-*/
-
-/* Game Plan V2:
-  1. Generate CharacterSet Arrays
-  2. Generate OrderedRandomizedCharArray
-  3. Make Array Permutation Function
-  4. Permute Array and map to string
-
-
-*/
 
 
 
-  // These Will be Set by User Later
 
-
-// Special Cases: 
-
-
-
-// I generated these arrays using the generateArrays.js file, then copied the objects from the console.
-let specialArray = [" ","!","\"", "#","$","%","&","'","(",")","*","+",",","-",".","/",":",";","<","=",">","?","@","[","\\","]","^","_","`"];
-let numArray = ["0","1","2","3","4","5","6","7","8","9"];
-let lowerCharArray = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
-let upperCharArray = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"]
-// console.log(numArray.join(''));
 function main() {
-  passwordArray = generatePasswordArray();
-  console.log("Password Array: ", passwordArray);
-  console.log("Shuffle: ", shuffleArray(passwordArray));
+
+  // Get references to the #generate element
+  var generateBtn = document.querySelector("#generate");
+  // Add event listener to generate button
+  generateBtn.addEventListener("hover", writePassword());
+  // let passwordFinal = generatePassword([20,true,true,true,true]);
+  // console.log("Final Password: ", passwordFinal);
 }
 
-function generatePasswordArray() {
+function writePassword() {
+  console.log("Event Triggered!");
+  let preferencesArray = getUserPreferences();
+  password = generatePassword(preferencesArray);
+  passwordText = document.querySelector("#password");
+  passwordText.value = password;
+}
 
-  let lengthPassword = 10; // Must be between 8 - 128
-  let hasSpecial = true;
-  let hasNumber = true;
-  let hasLower = true;
-  let hasUpper = true;
-  let passwordArray = [];
-  let allowedCharArray = [];
-  let numType = 0;
+function getUserPreferences() {
+  let preferencesArray = [20, false, true, true, true];
+  // TODO: Make PreferencesArray from user Input
+  
+  // Special Cases: 
+  /*
+  password length: 8-128
+  at least one type of character type is true
+  */
+  return preferencesArray;
+}
+// Function generates Password with default values specifying that it be 20 char long and contains all character types
+function generatePassword([lengthPassword, hasSpecial, hasNumber, hasLower, hasUpper] = [10, true, true, true, true]) {
+  // Char Sets: 
+  let specialArray = [" ","!","\"", "#","$","%","&","'","(",")","*","+",",","-",".","/",":",";","<","=",">","?","@","[","\\","]","^","_","`"];
+  let numArray = ["0","1","2","3","4","5","6","7","8","9"];
+  let lowerCharArray = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
+  let upperCharArray = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"];
+
+  // initializations: 
+  let passwordArray = []; // Will contain the characters of the final password
+  let allowedCharArray = []; // Will contain the set of allowed characters in the password
+  let numType = 0; // Will contain the total number of allowed types of characters 
+  
+  // If Statements count the number of types of allowed characters, make an allowedCharArray, 
+  // and make the first few characters each of the types of allowed characters.
   if(hasSpecial) {
-    passwordArray.push(specialArray[Math.floor(Math.random()*specialArray.length)]);
+    //Adds Special Characters to the Set of Allowed Characters
     allowedCharArray = allowedCharArray.concat(specialArray);
+    //Makes the next index a special character: which forces the final password to have special characters
+    passwordArray.push(specialArray[Math.floor(Math.random()*specialArray.length)]);
     numType++;
-    // console.log(passwordArray)
-    // console.log(allowedCharArray);
   }
   if(hasNumber) {
-    passwordArray.push(numArray[Math.floor(Math.random()*numArray.length)]);
+    //Adds Numbers to the Set of Allowed Characters
     allowedCharArray = allowedCharArray.concat(numArray);
+    //Makes the next index a number: which forces the final password to have numbers
+    passwordArray.push(numArray[Math.floor(Math.random()*numArray.length)]);
     numType++;
-    // console.log(passwordArray);
-    // console.log(allowedCharArray);
   }
   if(hasLower) {
-    passwordArray.push(lowerCharArray[Math.floor(Math.random()*lowerCharArray.length)]);
+    //Adds Lower-Case Letters to the Set of Allowed Characters
     allowedCharArray = allowedCharArray.concat(lowerCharArray);
+    //Makes the next index a lower-case letter: forcing the final password to have lower-case letters
+    passwordArray.push(lowerCharArray[Math.floor(Math.random()*lowerCharArray.length)]);
     numType++;
-    // console.log(passwordArray);
-    // console.log(allowedCharArray);
-
   }
   if(hasUpper) {
-    passwordArray.push(upperCharArray[Math.floor(Math.random()*upperCharArray.length)]);
+    //Addes Upper-Case Letters to the Set of Allowed Characters
     allowedCharArray = allowedCharArray.concat(upperCharArray);
+    //Makes the next index an upper-case letter: forcing the final password to have upper-case letters
+    passwordArray.push(upperCharArray[Math.floor(Math.random()*upperCharArray.length)]);
     numType++;
-    // console.log(passwordArray);
-    // console.log(allowedCharArray);
-
   }
-
+  // Randomizes the remaining slots (lengthPassword - numType) to any of the allowed characters in allowedCharArray
   for (let i = 0; i < lengthPassword - numType; i++) {
     let randomIndex = Math.floor(Math.random()*allowedCharArray.length);
-    // console.log("i = ", i, "| Index: ", randomIndex)
     passwordArray.push(allowedCharArray[randomIndex]);
-    // console.log(passwordArray);
-    // console.log(allowedCharArray);
   }
-  // console.log(passwordArray);
-  return passwordArray;
+  // Shuffles the characters to ensure a randomly generated password
+  passwordShuffle = shuffleArray(passwordArray);
+  // Turns the Password from an array into a string
+  passwordFinal = passwordShuffle.join('');
+  return passwordFinal;
 }
 
-// Fisher Yates Shuffle src = https://en.wikipedia.org/wiki/Fisher%E2%80%93Yates_shuffle
+// Fisher Yates Shuffle:  Source = https://en.wikipedia.org/wiki/Fisher%E2%80%93Yates_shuffle
 function shuffleArray(arr) {
   for (let i = arr.length - 1; i >= 0; i--) {
     randomIndex = Math.floor(Math.random() * i);
     source_elem = arr[i];
     target_elem = arr[randomIndex];
-    console.log("source: ", arr[i], " target: ", arr[randomIndex]);
     arr[i] = target_elem;
     arr[randomIndex] = source_elem;
-    console.log(arr);
   }
   return arr;
 }
 
 main();
-/*
-let randNumChar = function () {
-  let randomNumber = Math.floor(Math.random() * 10) + 48;
-  return String.fromCharCode(randomNumber);
-}
-console.log("Number Char: ", randNumChar);
-
-let randUpperChar = function () {
-  let randomNumber = Math.floor(Math.random() * 26) + 65;
-  return String.fromCharCode(randomNumber);
-}
-console.log("Upper Case Char: ", randUpperChar());
-
-let randLowerChar = function () {
-  let randomNumber = Math.floor(Math.random() * 26) + 97;
-  return String.fromCharCode(randomNumber);
-}
-console.log("Lower Case Char: ", randLowerChar)
-*/
-
-
-/*
-
-// Get references to the #generate element
-var generateBtn = document.querySelector("#generate");
-
-function generatePassword() {
-  console.log("generate password triggered");
-}
-
-// Write password to the #password input
-function writePassword() {
-  console.log("Event Triggered!");
-  //var password = generatePassword();
-  //var passwordText = document.querySelector("#password");
-
-  passwordText.value = password;
-
-}
-
-
-// Add event listener to generate button
-generateBtn.addEventListener("click", writePassword());
-*/
