@@ -13,9 +13,8 @@ Technologies Used:
 
 Please use this site to generate secure passwords which can be customized to your specific specifications.
 
-The site can be accessed here: 
-<!-- Edit Screenshot Below -->
-<!-- ![Screenshot of Deployed Site](./assets/images/Screenshot_Password.png "Screenshot") -->
+The site can be accessed here: https://hudsonpepper.github.io/password-generator/
+![Screenshot of Deployed Site](./assets/images/Screenshot_Example-Password.png "Screenshot")
 ## Credits
 
 This code is an adaptation of the code from https://github.com/coding-boot-camp/friendly-parakeet, though the password generation and user input sections of code are original work.

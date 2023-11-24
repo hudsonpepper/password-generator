@@ -61,7 +61,7 @@ function generatePassword([lengthPassword, hasSpecial, hasNumber, hasLower, hasU
   let numType = 0; // Will contain the total number of allowed types of characters 
   
   // If Statements count the number of types of allowed characters, make an allowedCharArray, 
-  // and make the first few characters each of the types of allowed characters.
+  // and make one of each of the first few password characters of the password a different type of allowed character.
   if(hasSpecial) {
     //Adds Special Characters to the Set of Allowed Characters
     allowedCharArray = allowedCharArray.concat(specialArray);
@@ -102,7 +102,6 @@ function generatePassword([lengthPassword, hasSpecial, hasNumber, hasLower, hasU
   return passwordFinal;
 }
 
-
 var generateBtn = document.querySelector("#generate");
 
 // Write password to the #password input
@@ -115,15 +114,5 @@ function writePassword() {
 
 }
 
-// Add event listener to generate button
+// Add event listener to generate button, and writes password upon click
 generateBtn.addEventListener("click", writePassword);
-
-/*
-function writePassword() {
-  console.log("Event Triggered!");
-  let preferencesArray = getUserPreferences();
-  password = generatePassword(preferencesArray);
-  passwordText = document.querySelector("#password");
-  passwordText.value = password;
-}
-*/
