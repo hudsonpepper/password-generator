@@ -1,4 +1,4 @@
-# Password Generator Starter Code [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+# Password Generator [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 This is a project designed to generate a secure password in accordance with user input. 
 
